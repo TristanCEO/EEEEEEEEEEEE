@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | GensanGlimpse</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #021d41 0%, #094677d9 60%, #003f9d8e 100%);
+      background-size: 200% 200%;
+      animation: gradientMove 10s ease-in-out infinite;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #loginModal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 85, 196, 0.445);
+    }
+    #loginForm {
+      background: #ffffff;
+      padding: 56px 48px 44px 48px;
+      border-radius: 28px;
+      box-shadow: 0 4px 32px rgba(21,101,192,0.18);
+      min-width: 320px;
+      max-width: 98vw;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: center;
+      position: relative;
+    }
+    .login-fish-anim {
+      font-size: 2.6rem;
+      color: #ffd600;
+      animation: fishBounce 1.5s infinite alternate cubic-bezier(.5,1.8,.5,1);
+      display: inline-block;
+      margin-bottom: 0.2em;
+    }
+    @keyframes fishBounce {
+      0% { transform: translateY(0) rotate(-10deg) scale(1);}
+      50% { transform: translateY(-12px) rotate(10deg) scale(1.15);}
+      100% { transform: translateY(0) rotate(-10deg) scale(1);}
+    }
+    #loginForm input[type="text"],
+    #loginForm input[type="password"] {
+      padding: 16px;
+      font-size: 1.15rem;
+      border-radius: 12px;
+      border: 1.5px solid #1565c0;
+      width: 100%;
+      background: #def2ff;
+      margin-bottom: 10px;
+    }
+    #loginForm button[type="submit"] {
+      background: #ffd600;
+      color: #1565c0;
+      border: none;
+      border-radius: 30px;
+      padding: 16px 40px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.10);
+    }
+    #loginError {
+      color: #d32f2f;
+      font-size: 1.1rem;
+      display: none;
+    }
+    .explore-gensan-msg {
+      margin-top: 18px;
+      color: #1976d2;
+      font-size: 1.15rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .explore-gensan-msg i {
+      color: #ffd600;
+      margin-right: 6px;
+    }
+    /* Decorative bubbles for background */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+      z-index: 0;
+      pointer-events: none;
+      animation: floatBubble 12s infinite linear;
+    }
+    .bubble1 { width: 120px; height: 120px; left: 2vw; top: 8vh; background: #ffd600; animation-delay: 0s;}
+    .bubble2 { width: 80px; height: 80px; right: 4vw; top: 18vh; background: #1976d2; animation-delay: 2s;}
+    .bubble3 { width: 60px; height: 60px; left: 10vw; bottom: 12vh; background: #ffd600; animation-delay: 4s;}
+    .bubble4 { width: 100px; height: 100px; right: 10vw; bottom: 8vh; background: #1976d2; animation-delay: 6s;}
+    .bubble5 { width: 40px; height: 40px; left: 50vw; top: 60vh; background: #ffd600; animation-delay: 8s;}
+    @keyframes floatBubble {
+      0% { transform: translateY(0) scale(1);}
+      50% { transform: translateY(-30px) scale(1.08);}
+      100% { transform: translateY(0) scale(1);}
+    }
+    @media (max-width: 600px) {
+      #loginForm {
+        padding: 24px 8vw 24px 8vw;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Decorative bubbles for background -->
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+  <div id="loginModal">
+    <form id="loginForm">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <span class="login-fish-anim">
+          <i class="fas fa-fish"></i>
+        </span>
+        <h2 style="color:#1976d2; margin-bottom:0; font-size:2rem; text-align:center;">
+          Login to <span style="color:#ffd600;">GensanGlimpse</span>
+        </h2>
+      </div>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">
+        <i class="fas fa-sign-in-alt"></i> Log In
+      </button>
+      <div id="loginError">Invalid username or password.</div>
+      <div class="explore-gensan-msg">
+        <i class="fas fa-map-marker-alt"></i>
+        Explore Gensan Now!
+      </div>
+    </form>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      if (username === 'Tristan125' && password === '125Tristan') {
+        window.location.href = "main.html";
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

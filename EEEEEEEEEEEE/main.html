@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Santos City Website
+  </title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Add Google Fonts for tourist-friendly header -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 3;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #dfd000;
+  min-height: 100vh;
+  /* Animated gradient background */
+  background: linear-gradient(120deg, #021d41 0%, #094677d9 60%, #003f9d8e 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease-in-out infinite;
+  transition: background .5s;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Header */
+header {
+  background: rgba(19,93,178,0.95);
+  color: #fff;
+  padding: 4px 0 0 0;
+  border-bottom: 4px solid #ffd600; /* yellow accent */
+  position: relative;
+  box-shadow: 0 2px 8px rgba(21,101,192,0.10);  
+  max-width: 100vw;
+}
+
+/* Logo rotation animation */
+@keyframes logoSpinIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-360deg) scale(0.5);
+  }
+  60% {
+    opacity: 3;
+    transform: rotate(30deg) scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1.2);
+  }
+}
+.logo {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  background: #fff;
+  border-radius: 50%;
+  border: 4px solid #ffd600;
+  box-shadow: 0 2px 30px rgba(21,150,192,0.18);
+  animation: logoSpinIn 2.2s cubic-bezier(0.90, 1.55, 0.10, 1.55) 1.1s both;
+  align-self: center;
+}
+
+/* Header title rolling in from left to right */
+@keyframes titleSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%) skewX(-30deg) scale(0.7);
+  }
+  60% {
+    opacity: 11;
+    transform: translateX(20%) skewX(10deg) scale(0..);
+  }
+  80% {
+    transform: translateX(-2%) skewX(-2deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg) scale(1);
+  }
+}
+header h1 {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+  font-size: 1.6rem;
+  font-family: 'Baloo 2', 'Segoe UI', 'Arial', sans-serif;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 1px 2px 8px #1976d2;
+  /* Fade in animation only */
+  animation: titleFadeIn 1.2s ease 0.2s both;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+@keyframes titleFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+header h1 i {
+  color: #ffd600;
+  margin-right: 8px;
+}
+
+nav ul {
+  list-style: none;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s, border-bottom 0.2s;
+  border-bottom: 2px solid transparent;
+  padding: 4px 0;
+}
+
+nav ul li a:hover {
+  color: #ffd600;
+  border-bottom: 2px solid #ffd600;
+}
+
+/* Enhanced animated background with floating bubbles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.18;
+  pointer-events: none;
+  animation: floatBubble 18s linear infinite;
+  z-index: 0;
+}
+.bubble1 { width: 120px; height: 120px; left: 10vw; top: 80vh; background: #ffd600; animation-delay: 0s;}
+.bubble2 { width: 80px; height: 80px; left: 70vw; top: 90vh; background: #fff; animation-delay: 4s;}
+.bubble3 { width: 100px; height: 100px; left: 40vw; top: 85vh; background: #1976d2; animation-delay: 8s;}
+.bubble4 { width: 60px; height: 60px; left: 80vw; top: 95vh; background: #ffd600; animation-delay: 12s;}
+.bubble5 { width: 90px; height: 90px; left: 20vw; top: 92vh; background: #fff; animation-delay: 16s;}
+
+@keyframes floatBubble {
+  0% { transform: translateY(0) scale(1);}
+  100% { transform: translateY(-100vh) scale(1.2);}
+}
+
+/* Layout for main and aside */
+.main-content-wrapper {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Make aside/blog wider (width) and more prominent, not just longer */
+aside.blog-faq {
+  flex: 30; /* Increase flex to make it take more horizontal space */
+  min-width: 600px;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.219);
+  border-radius: 18px;
+  box-shadow: 0 2px 24px rgba(21,101,192,0.13);
+  padding: 38px 32px 28px 32px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+  top: 0;
+  z-index: 2;
+  border-left: 8px solid #ffd600;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Responsive adjustment for wider blog */
+@media (max-width: 1200px) {
+  aside.blog-faq {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 18px 6vw 18px 6vw;
+  }
+}
+
+@media (max-width: 1100px) {
+  .main-content-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+  aside.blog-faq {
+    max-width: 98vw;
+    min-width: unset;
+    margin: 20px auto 0 auto;
+    position: static;
+  }
+}
+
+main {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex;
+  padding: 25px 10;
+  z-index: 1;
+}
+
+aside.blog-faq {
+  flex: 1;
+  min-width: 900px;
+  max-width: 100px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 23px;
+  box-shadow: 0 2px 16px rgba(21,101,192,0.10);
+  padding: 28px 22px 18px 22px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 150px;
+  position: sticky;
+  top: 30px;
+  z-index: 2;
+  border-left: 40px solid #ffd600;
+}
+
+aside h2 {
+  font-size: 1.5rem;
+  margin-bottom: 14px;
+  color: #1976d2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.faq-list {
+  margin-bottom: 30px;  
+}
+.faq-item {
+  margin-bottom: 18px;
+}
+.faq-question {
+  font-weight: bold;
+  cursor: pointer;
+  color: #3091ff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.faq-question:hover {
+  color: #ffd600;
+}
+.faq-answer {
+  display: none;
+  margin-top: 6px;
+  color: #e5ff00;
+  padding-left: 18px;
+  border-left: 2px solid #ffd600;
+  font-size: 0.98rem;
+  transition: all 0.3s;
+}
+.faq-answer p {
+  color:#021d41
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+.blog-list {
+  list-style: none;
+  padding-left: 0;
+}
+.blog-list li {
+  margin-bottom: 18px;
+  border-bottom: 1px solid #e3e3e3;
+  padding-bottom: 10px;
+}
+.blog-list li:last-child {
+  border-bottom: none;
+}
+.blog-title {
+  font-weight: bold;
+  color: #1565c0;
+  font-size: 1.08rem;
+}
+.blog-date {
+  font-size: 0.92rem;
+  color: #888;
+  margin-bottom: 4px;
+  display: block;
+}
+.blog-snippet {
+  color: #222;
+  font-size: 0.98rem;
+}
+
+/* Footer */
+footer {
+  background-color: #1565c0;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 4px solid #ffd600;
+  margin-top: 30px;
+}
+
+a {
+  color: #1976d2;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #ffd600;
+  text-decoration: underline;
+}
+
+/* Animated fish icon above login title */
+.login-fish-anim {
+  font-size: 2.6rem;
+  color: #ffd600;
+  animation: fishBounce 1.5s infinite alternate cubic-bezier(.5,1.8,.5,1);
+  display: inline-block;
+  margin-bottom: 0.2em;
+}
+@keyframes fishBounce {
+  0% { transform: translateY(0) rotate(-10deg) scale(1);}
+  50% { transform: translateY(-12px) rotate(10deg) scale(1.15);}
+  100% { transform: translateY(0) rotate(-10deg) scale(1);}
+}
+
+/* Move about text below header title */
+.header-about-below {
+  width: 100%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  color: #ffffff;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 6px #021d41;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 4px;
+}
+
+@media (max-width: 700px) {
+  .header-about-below {
+    font-size: 0.98rem;
+    text-align: center;
+    padding-left: 100px;
+  }
+}
+
+/* Stop the animation of the fishes in the header */
+.header-fish-animated {
+  color: #ffd600;
+  opacity: 0.92;
+  display: inline-block;
+  will-change: transform;
+  /* Remove animation */
+  animation: none !important;
+}
+
+/* Enlarge and recolor the 3 fish icons near the logout button */
+.header-fish-animated-group {
+  position: absolute;
+  top: 18px;
+  right: 210px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 4;
+}
+.header-fish-animated {
+  color: #fff !important;
+  opacity: 0.97;
+  display: inline-block;
+  will-change: transform;
+  animation: none !important;
+}
+.header-fish-animated.fish-a { font-size: 2.8rem; }
+.header-fish-animated.fish-b { font-size: 3.5rem; }
+.header-fish-animated.fish-c { font-size: 2.2rem; }
+
+/* Move logo/title left, quote below logo, logout top right */
+.container.header-flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.logo {
+  margin-left: 0;
+  margin-right: 0.5em;
+  width: 90px;
+  height: 90px;
+}
+.header-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+header h1 {
+  margin: 0 0 0 0;
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: 'Baloo 2', 'Segoe UI', 'Arial', sans-serif;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 1px 2px 8px #1976d2;
+  animation: titleFadeIn 1.2s ease 0.2s both;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.header-quote {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin: 0.2em 0 0 0;
+  margin-bottom: 10px;
+  margin-left: 75px;
+  text-shadow: 1px 1px 6px #021d41;
+  display: block;
+}
+
+/* Logout button at top right */
+.logout-btn {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  background: #ffd600;
+  color: #1565c0;
+  border: none;
+  border-radius: 30px;
+  padding: 16px 40px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(21,101,192,0.10);
+  transition: background 0.2s, color 0.2s;
+  z-index: 5;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 900px) {
+  .container.header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .header-fish-animated-group {
+    position: static;
+    margin-top: 10px;
+    right: unset;
+    top: unset;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  .logout-btn {
+    position: static;
+    margin-left: auto;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  .header-quote {
+    font-size: 1.05rem;
+  }
+}
+@media (max-width: 600px) {
+  .container.header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+  .logo {
+    width: 54px;
+    height: 54px;
+  }
+  header h1 {
+    font-size: 1.2rem;
+  }
+  .header-quote {
+    font-size: 0.92rem;
+  }
+  .logout-btn {
+    font-size: 1rem;
+    padding: 10px 18px;
+    max-width: 98vw;
+  }
+  .header-fish-animated.fish-a { font-size: 1.5rem; }
+  .header-fish-animated.fish-b { font-size: 2.1rem; }
+  .header-fish-animated.fish-c { font-size: 1.1rem; }
+}
+
+/* Responsive and enlarged blog overview image */
+.blog-faq .gensan-overview-img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 2px 24px rgba(21,101,192,0.13);
+  margin: 0 auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .blog-faq .gensan-overview-img {
+    max-width: 98vw;
+    border-radius: 14px;
+  }
+}
+</style>
+</head>
+<body>
+  <!-- Floating bubbles for background -->
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+  <header>
+    <div class="container header-flex" style="position:relative;">
+      <img src="img/gensan.jpg" alt="Logo" class="logo" />
+      <div class="header-title-group">
+        <h1>
+          <i class="fas fa-fish"></i> GensanGlimpse
+          <span class="header-subtitle" style="font-family: 'Baloo 2', 'Segoe UI', Arial, sans-serif; color: #ffd600; font-size: 1.3rem; font-weight: bold; text-shadow: 1px 1px 6px #021d41; margin-left: 14px;">
+            | Go GenSan
+          </span>
+        </h1>
+        <span class="header-quote">Introducing General Santos City</span>
+      </div>
+      <button class="logout-btn" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i> Log out
+      </button>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="tourist-spots.html"><i class="fas fa-map-marker-alt"></i> Tourist Spots</a></li>
+        <li><a href="festivals.html"><i class="fas fa-calendar-alt"></i> Festivals</a></li>
+        <li><a href="accommodations.html"><i class="fas fa-hotel"></i> Accommodations</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="https://gensantos.gov.ph/" target="_blank"><i class="fas fa-globe"></i> Official GenSan Site</a></li>
+        <li>
+          <a href="https://www.google.com/maps/place/General+Santos+City,+South+Cotabato/data=!4m2!3m1!1s0x32f79cf31aca6663:0xcc2a0e32287d6748?sa=X&ved=1t:242&ictx=111" target="_blank">
+            <i class="fas fa-map"></i> General Santos Map
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <br>
+  <div class="main-content-wrapper">
+    <main>
+      <section id="about">
+        <div class="container">
+          <h2><i class="fas fa-city"></i> About</h2>
+          <p>General Santos City, known as the "Tuna Capital of the Philippines," 
+              is a bustling city in the southern part of Mindanao. It's renowned for its rich culture, vibrant festivals,
+              and thriving tuna industry.<br><br>
+              Nestled in the southern part of Mindanao, 
+              General Santos City—affectionately known as GenSan—is a vibrant metropolis celebrated for its rich cultural heritage, thriving tuna industry,
+               and warm hospitality. Whether you're an adventure seeker, 
+               a history enthusiast, or a culinary explorer, GenSan offers a diverse array of experiences to delight every traveler</p>
+        </div>
+      </section>
+<br>  
+      <section id="tourist-spots">
+        <div class="container">
+          <h2><i class="fas fa-map"></i> Top Tourist Spots</h2>
+          <ul>
+            <li><strong><i class="fas fa-fish"></i> General Santos City Fish Port Complex</strong> - Witness the bustling tuna auctions and fresh seafood at the largest fish port in the Philippines.</li>
+            <li><strong><i class="fas fa-tree"></i> Plaza Heneral Santos</strong> - A 4.5-hectare park featuring the City Hall and a variety of street food vendors.</li>
+            <li><strong><i class="fas fa-mountain"></i> Mount Matutum</strong> - A majestic mountain offering hiking opportunities with breathtaking views of Sarangani Bay.</li>
+            <li><strong><i class="fas fa-umbrella-beach"></i> Queen Tuna Park</strong> - A coastal park providing beachside cabanas and shaded areas, perfect for relaxation.</li>
+            <li><strong><i class="fas fa-utensils"></i> Tiongson Arcade</strong> - A culinary hotspot offering fresh seafood and local delicacies in a vibrant setting.</li>
+          </ul>
+        </div>
+      </section>
+<br><br>
+      <section id="festivals">
+        <div class="container">
+          <h2><i class="fas fa-calendar"></i> Festivals</h2>
+          <p><strong>Tuna Festival</strong> - Celebrated every September 1 to 5, featuring a colorful tuna-themed float parade, culinary competitions, and seafood bazaars.</p>
+          <p><strong>Kalilangan Festival</strong> - Held annually in February, showcasing the rich cultural heritage of GenSan through street dancing, musical performances, and traditional ceremonies.</p>
+        </div>
+      </section>
+<br>
+      <section id="accommodations">
+        <div class="container">
+          <h2><i class="fas fa-bed"></i> Where to Stay</h2>
+          <ul>
+            <li><strong>SM City General Santos</strong> - The largest mall in Soccsksargen, offering a variety of shopping and dining options.</li>
+            <li><strong>Robinsons GenSan</strong> - A two-storey mall with over 150 shops and restaurants, providing a comprehensive retail experience.</li>
+          </ul>
+        </div>
+      </section>
+      <br>
+      <section id="contact">
+        <div class="container">
+          <h2><i class="fas fa-phone"></i> Contact Us</h2>
+          <p><strong><i class="fas fa-building"></i> General Santos City Tourism Office</strong></p>
+          <p>For inquiries and assistance, contact the tourism office at <a href="tel:+63833512345"><i class="fas fa-phone"></i> +63 83 351 2345</a> or email <a href="mailto:tourism@gensantos.gov.ph"><i class="fas fa-envelope"></i> tourism@gensantos.gov.ph</a>.</p>
+          <p><strong><i class="fas fa-landmark"></i> General Santos City Hall</strong></p>
+          <p>Located at City Hall Building, General Santos City. Reachable at <a href="tel:+63833567890"><i class="fas fa-phone"></i> +63 83 356 7890</a>.</p>
+        </div>
+      </section>
+      <br>
+      <!-- FAQ Section -->
+      <section id="faq">
+        <div class="container">
+          <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question"><i class="fas fa-plus-circle"></i> What is the best time to visit General Santos City?</div>
+              <div class="faq-answer">The best time to visit is during the Tuna Festival in September or the Kalilangan Festival in February for a vibrant cultural experience.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question"><i class="fas fa-plus-circle"></i> How do I get to General Santos City?</div>
+              <div class="faq-answer">You can fly directly to General Santos International Airport from Manila or Cebu, or travel by bus from major Mindanao cities.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question"><i class="fas fa-plus-circle"></i> Is General Santos City safe for tourists?</div>
+              <div class="faq-answer">Yes, GenSan is generally safe for tourists. As with any city, exercise usual precautions and consult local authorities for updates.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question"><i class="fas fa-plus-circle"></i> What local delicacies should I try?</div>
+              <div class="faq-answer">Don’t miss the fresh tuna sashimi, kinilaw, and other seafood dishes at local markets and restaurants!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Blog and FAQ Sidebar (now wider and with more info) -->
+    <aside class="blog-faq">
+      <h2 style="color:#1976d2; font-size:1.7rem; margin-bottom:18px;">
+        Welcome to General Santos City - The Tuna Capital of the Philippines
+      </h2>
+      <!-- Add GenSan overview image here -->
+      <div style="text-align:center; margin-bottom:18px;">
+        <img 
+          src="img/gensanplace.jpg" 
+          alt="Overview of General Santos City" 
+          class="gensan-overview-img"
+        >
+        <div style="font-size:1.05rem; color:#1976d2; margin-top:8px; font-weight:bold;">
+          An aerial view of vibrant General Santos City
+        </div>
+      </div>
+      <h2><i class="fas fa-blog"></i> Latest Blog</h2>
+      <ul class="blog-list">
+        <li>
+          <span class="blog-title">A Day at the Fish Port: GenSan’s Tuna Culture</span>
+          <span class="blog-date">May 2025</span>
+          <div class="blog-snippet">
+            Experience the excitement of the early morning tuna auctions and discover why GenSan is the Tuna Capital of the Philippines. 
+            The Fish Port Complex is a hive of activity, with fishermen unloading their catch and buyers from all over the world bidding for the best tuna. 
+            The port not only supports the local economy but also showcases the city’s global significance in the seafood industry.<br>
+            <b>Fun Fact:</b> GenSan exports tons of sashimi-grade tuna to Japan and the US every year.<br>
+            <b>Source:</b> 
+            <a href="https://www.philstar.com/lifestyle/travel-and-tourism/2023/09/01/2292597/gensan-tuna-capital-philippines" target="_blank">Philstar: GenSan, Tuna Capital of the Philippines</a>
+          </div>
+        </li>
+        <li>
+          <span class="blog-title">Top 5 Must-Try Foods in GenSan</span>
+          <span class="blog-date">April 2025</span>
+          <div class="blog-snippet">
+            From kinilaw (Filipino ceviche) to grilled tuna jaw (panga), GenSan’s food scene is a paradise for seafood lovers. 
+            Don’t miss the crispy tuna tail, sinuglaw, and the famous tuna sashimi served fresh at local eateries and markets.<br>
+            <b>Recommended Spot:</b> Tiongson Arcade for a true local food adventure.<br>
+            <b>Source:</b> 
+            <a href="https://www.spot.ph/eatdrink/the-latest-eat-drink/82844/gensan-food-guide-a833-20200224" target="_blank">Spot.ph: GenSan Food Guide</a>
+          </div>
+        </li>
+        <li>
+          <span class="blog-title">Kalilangan Festival: A Celebration of Unity</span>
+          <span class="blog-date">February 2025</span>
+          <div class="blog-snippet">
+            The Kalilangan Festival is a vibrant celebration of GenSan’s multicultural roots, featuring street dances, parades, and traditional music. 
+            It commemorates the harmonious coexistence of Christians, Muslims, and indigenous peoples in the city.<br>
+            <b>Highlight:</b> Don’t miss the colorful street dancing and cultural shows at the city plaza.<br>
+            <b>Source:</b> 
+            <a href="https://www.gensantos.gov.ph/kalilangan-festival/" target="_blank">GenSan Official: Kalilangan Festival</a>
+          </div>
+        </li>
+        <li>
+          <span class="blog-title">Eco Adventures: Hiking Mount Matutum</span>
+          <span class="blog-date">March 2025</span>
+          <div class="blog-snippet">
+            Mount Matutum offers a challenging yet rewarding trek for nature lovers. The trail winds through lush forests and ends with breathtaking views of South Cotabato and Sarangani Bay. 
+            The mountain is also home to rare flora and fauna, making it a must-visit for eco-tourists.<br>
+            <b>Tip:</b> Hire a local guide for a safe and informative climb.<br>
+            <b>Source:</b> 
+            <a href="https://www.lakwatsero.com/destinations/mount-matutum/" target="_blank">Lakwatsero: Mount Matutum</a>
+          </div>
+        </li>
+        <li>
+          <span class="blog-title">Queen Tuna Park: Urban Beach Escape</span>
+          <span class="blog-date">January 2025</span>
+          <div class="blog-snippet">
+            Queen Tuna Park is a favorite spot for locals and tourists alike. Enjoy a relaxing afternoon by the sea, rent a cabana, or sample street food from nearby vendors. 
+            The park is also a great place to watch the sunset over Sarangani Bay.<br>
+            <b>Source:</b> 
+            <a href="https://www.choosephilippines.com/go/parks-and-wildlife/4737/queen-tuna-park-gensan" target="_blank">Choose Philippines: Queen Tuna Park</a>
+          </div>
+        </li>
+      </ul>
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question"><i class="fas fa-plus-circle"></i> Can I swim at Queen Tuna Park?</div>
+          <div class="faq-answer"><p>Yes, Queen Tuna Park has designated swimming areas and beachside cabanas for visitors.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><i class="fas fa-plus-circle"></i> Are there guided tours available?</div>
+          <div class="faq-answer"><p>Several local agencies offer guided city and food tours. Check with the tourism office for recommendations.</p></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 General Santos City Tourism. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script>
+    // FAQ toggle logic for both main and sidebar
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('active');
+        // Change icon
+        const icon = this.querySelector('i');
+        if (item.classList.contains('active')) {
+          icon.classList.remove('fa-plus-circle');
+          icon.classList.add('fa-minus-circle');
+        } else {
+          icon.classList.remove('fa-minus-circle');
+          icon.classList.add('fa-plus-circle');
+        }
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Log out button redirects to login page
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      window.location.href = "index.html";
+    });
+  </script>
+  <script src="scripts.js"></script>
+</body>
+</html>
